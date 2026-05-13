@@ -76,7 +76,7 @@ app.get("/api/users/:id", async (req: Request, res: Response) => {
       [id],
     );
 
-    if (!result.rows[0]) {
+    if (result.rows.length === 0) {
       res.status(404).json({
         success: false,
         message: "User Not Found",
@@ -134,12 +134,12 @@ app.put("/api/users/:id", async (req: Request, res: Response) => {
 
   try {
     const result = await pool.query(
-      `UPDATE users SET name = $1, password = $2, age= $3 WHERE id = $4 RETURNING *
+      `UPDATE users SET name = COALESCE($1,name), password = COALESCE($2,password), age= COALESCE($3,age) WHERE id = $4 RETURNING *
     `,
       [name, password, age, id],
     );
 
-    if (!result.rows[0]) {
+    if (result.rows.length === 0) {
       res.status(404).json({
         success: false,
         message: "User Not Found",
@@ -151,6 +151,38 @@ app.put("/api/users/:id", async (req: Request, res: Response) => {
       success: true,
       message: "user updated!",
       data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+  }
+});
+
+app.delete("/api/users/:id", async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  try {
+    const result = await pool.query(
+      `
+            DELETE FROM users WHERE id=$1
+        `,
+      [id],
+    );
+
+    if (result.rowCount === 0) {
+      res.status(404).json({
+        success: false,
+        message: "User Not Found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "user deleted successfully",
+      data: {},
     });
   } catch (error: any) {
     res.status(500).json({
