@@ -9,4 +9,5 @@ router.get("/", userController.getAllUser);
 router.get("/:id", userController.getSingleUser);
 router.put("/:id", userController.userUpdate);
 router.delete("/:id", userController.userDelete);
+
 export const userRoute = router;
