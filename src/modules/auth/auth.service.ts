@@ -39,12 +39,17 @@ const loginUserIntoDB = async (payLoad: {
     name: user.name,
     email: user.email,
     is_active: user.is_active,
+    role: user.role,
   };
   const accessToken = jwt.sign(jwtPayLoad, config.secret as string, {
     expiresIn: "1d",
   });
 
-  return { accessToken };
+  const refreshToken = jwt.sign(jwtPayLoad, config.refresh_secret as string, {
+    expiresIn: "1d",
+  });
+
+  return { accessToken, refreshToken };
 };
 
 export const authService = {
