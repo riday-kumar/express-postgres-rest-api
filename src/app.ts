@@ -22,11 +22,12 @@ app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger);
 
-const corsOptions = {
-  origin: "http://localhost:5000",
-};
+// const corsOptions = {
+//   origin: "http://localhost:5000",
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({
