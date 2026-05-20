@@ -156,3 +156,9 @@
  Method : POST - Time : 1779295204557 - URL : /api/users
 
  Method : POST - Time : 1779295219853 - URL : /api/users
+
+ Method : POST - Time : 1779299328582 - URL : /api/users
+
+ Method : GET - Time : 1779299340528 - URL : /api/users
+
+ Method : GET - Time : 1779299368952 - URL : /api/users
