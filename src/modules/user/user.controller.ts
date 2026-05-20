@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { pool } from "../../db";
 import { userService } from "./user.service";
+import sendResponse from "../../utility/sendResponse";
 
 const createUser = async (req: Request, res: Response) => {
   //   console.log(req.body);
@@ -30,16 +31,19 @@ const getAllUser = async (req: Request, res: Response) => {
   console.log("controller", req.user);
   try {
     const result = await userService.getAllUsersFromDB();
-    res.status(200).json({
+
+    sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: "All Users get successfully",
       data: result.rows,
     });
   } catch (error: any) {
-    res.status(500).json({
+    sendResponse(res, {
+      statusCode: 500,
       success: false,
       message: error.message,
-      error: error,
+      data: error,
     });
   }
 };

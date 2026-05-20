@@ -52,7 +52,7 @@ const auth = (...roles: ROLES[]) => {
         });
       }
 
-      console.log("Auth Role From Middleware: ", user.role);
+      // console.log("Auth Role From Middleware: ", user.role);
 
       if (roles.length && !roles.includes(user.role)) {
         res.status(403).json({ success: false, message: "Forbidden" });
