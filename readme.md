@@ -35,3 +35,33 @@ npm i -D tsx
 "type": "module"
 "dev" : "tsx watch ./src/server.ts",
 ```
+
+### How to deploy vercel
+
+`vercel login`
+
+add vercel config in the app (in the root)
+
+```
+vercel.json
+
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/server.js",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["dist/**"] }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/server.js"
+    }
+  ]
+}
+
+```
+
+`vercel --prod`

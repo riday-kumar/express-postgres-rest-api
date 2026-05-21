@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
-import { pool } from "../../db";
+import { pool } from "../../db/index.js";
 import jwt, { type JwtPayload } from "jsonwebtoken";
-import config from "../../config";
+import config from "../../config/index.js";
 
 const loginUserIntoDB = async (payLoad: {
   email: string;

@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { profileService } from "./profile.service";
+import { profileService } from "./profile.service.js";
 
 const createProfile = async (req: Request, res: Response) => {
   try {

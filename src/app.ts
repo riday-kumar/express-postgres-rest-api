@@ -4,14 +4,14 @@ import express, {
   type Response,
 } from "express";
 import "dotenv/config";
-import { initDB, pool } from "./db";
-import { userRoute } from "./modules/user/user.route";
-import { profileRoute } from "./modules/profile/profile.route";
-import { authRoute } from "./modules/auth/auth.route";
-import logger from "./middleware/logger";
+import { initDB, pool } from "./db/index.js";
+import { userRoute } from "./modules/user/user.route.js";
+import { profileRoute } from "./modules/profile/profile.route.js";
+import { authRoute } from "./modules/auth/auth.route.js";
+import logger from "./middleware/logger.js";
 import CookieParser from "cookie-parser";
 import cors from "cors";
-import globalErrorHandler from "./middleware/globalErrorHandler";
+import globalErrorHandler from "./middleware/globalErrorHandler.js";
 
 const app: Application = express();
 

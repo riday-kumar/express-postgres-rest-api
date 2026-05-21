@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import { pool } from "../../db";
-import { userService } from "./user.service";
-import sendResponse from "../../utility/sendResponse";
+import { pool } from "../../db/index.js";
+import { userService } from "./user.service.js";
+import sendResponse from "../../utility/sendResponse.js";
 
 const createUser = async (req: Request, res: Response) => {
   //   console.log(req.body);

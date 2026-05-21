@@ -4,10 +4,10 @@ import {
   type Request,
   type Response,
 } from "express";
-import { pool } from "../../db";
-import { userController } from "./user.controller";
-import auth from "../../middleware/auth";
-import { USER_ROLE } from "../../types";
+import { pool } from "../../db/index.js";
+import { userController } from "./user.controller.js";
+import auth from "../../middleware/auth.js";
+import { USER_ROLE } from "../../types/index.js";
 
 const router = Router();
 
