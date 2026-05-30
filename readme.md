@@ -84,6 +84,14 @@ export default defineConfig({
 #### Now time to edit **package.json** file
 
 ```
+"scripts": {
+    "start": "node dist/server.js",
+    "dev": "tsx watch ./src/server.ts",
+    "build": "tsc"
+  }
+
+------------
+
 "type": "module"
 "dev" : "tsx watch ./src/server.ts",
 ```
