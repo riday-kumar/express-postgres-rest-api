@@ -1,6 +1,6 @@
 ### How to Set Up Express.js with TypeScript
 
-#### Commands are :
+#### npm packages are :
 
 ```
 npm init -y
@@ -20,13 +20,65 @@ npm i -D tsx
 #### now time to edit in **tsconfig.json**
 
 ```
-"rootDir": "./src", // uncomment
-"outDir": "./dist", // uncomment
-"module": "esnext", // change it ---> 'esnext'
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    // File Layout
+    "rootDir": "./src",
+    "outDir": "./dist",
 
-"types": ["node"], // ---> type will be 'node'
+    // Environment Settings
+    // See also https://aka.ms/tsconfig/module
+    "module": "nodenext",
+    "target": "esnext",
+    "types": ["node"],
+    "moduleResolution": "nodenext",
 
-"jsx": "react-jsx", // comment this line
+    // Other Outputs
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Recommended Options
+    "strict": true,
+    // "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+#### tsup.config.ts
+```
+import { defineConfig } from "tsup";
+
+export default defineConfig({
+  entry: ["src/server.ts"],
+  format: ["esm"], // Keep this as ESM
+  target: "esnext",
+  outDir: "dist",
+  clean: true,
+  bundle: true,
+  splitting: false,
+  sourcemap: true,
+  // Add this banner to shim require() for CJS dependencies
+  banner: {
+    js: `
+      import { createRequire } from 'module';
+      const require = createRequire(import.meta.url);
+    `,
+  },
+});
+
 ```
 
 #### Now time to edit **package.json** file
